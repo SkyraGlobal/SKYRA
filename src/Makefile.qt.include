@@ -1,0 +1,738 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/skyra-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# skyra qt core #
+include Makefile.qt_locale.include
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/skyra/forms/loadingdialog.ui \
+  qt/skyra/forms/snackbar.ui \
+  qt/skyra/forms/navmenuwidget.ui \
+  qt/skyra/forms/lockunlock.ui \
+  qt/skyra/forms/expandablebutton.ui \
+  qt/skyra/forms/receivedialog.ui \
+  qt/skyra/forms/balancebubble.ui \
+  qt/skyra/forms/topbar.ui \
+  qt/skyra/forms/txrow.ui \
+  qt/skyra/forms/dashboardwidget.ui \
+  qt/skyra/forms/addresslabelrow.ui \
+  qt/skyra/forms/contactdropdownrow.ui \
+  qt/skyra/forms/mninfodialog.ui \
+  qt/skyra/forms/optionbutton.ui \
+  qt/skyra/forms/masternodewizarddialog.ui \
+  qt/skyra/forms/mnrow.ui \
+  qt/skyra/forms/masternodeswidget.ui \
+  qt/skyra/forms/myaddressrow.ui \
+  qt/skyra/forms/csrow.ui \
+  qt/skyra/forms/sendmemodialog.ui \
+  qt/skyra/forms/sendchangeaddressdialog.ui \
+  qt/skyra/forms/sendconfirmdialog.ui \
+  qt/skyra/forms/sendcustomfeedialog.ui \
+  qt/skyra/forms/sendmultirow.ui \
+  qt/skyra/forms/send.ui \
+  qt/skyra/forms/addnewcontactdialog.ui \
+  qt/skyra/forms/requestdialog.ui \
+  qt/skyra/forms/receivewidget.ui \
+  qt/skyra/forms/tooltipmenu.ui \
+  qt/skyra/forms/addresseswidget.ui \
+  qt/skyra/forms/defaultdialog.ui \
+  qt/skyra/forms/coldstakingwidget.ui \
+  qt/skyra/forms/proposalcard.ui \
+  qt/skyra/forms/mnselectiondialog.ui \
+  qt/skyra/forms/votedialog.ui \
+  qt/skyra/forms/createproposaldialog.ui \
+  qt/skyra/forms/proposalinfodialog.ui \
+  qt/skyra/forms/governancewidget.ui \
+  qt/skyra/settings/forms/settingsbackupwallet.ui \
+  qt/skyra/settings/forms/settingsexportcsv.ui \
+  qt/skyra/settings/forms/settingsbittoolwidget.ui \
+  qt/skyra/settings/forms/settingsconsolewidget.ui \
+  qt/skyra/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/skyra/settings/forms/settingsfaqwidget.ui \
+  qt/skyra/settings/forms/settingsinformationwidget.ui \
+  qt/skyra/settings/forms/settingsmainoptionswidget.ui \
+  qt/skyra/settings/forms/settingssignmessagewidgets.ui \
+  qt/skyra/settings/forms/settingswalletoptionswidget.ui \
+  qt/skyra/settings/forms/settingswalletrepairwidget.ui \
+  qt/skyra/settings/forms/settingswidget.ui \
+  qt/skyra/forms/welcomecontentwidget.ui \
+  qt/skyra/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/skyra/moc_skyragui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_rpcexecutor.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/skyra/moc_loadingdialog.cpp \
+  qt/skyra/moc_pwidget.cpp \
+  qt/skyra/moc_focuseddialog.cpp \
+  qt/skyra/moc_snackbar.cpp \
+  qt/skyra/moc_navmenuwidget.cpp \
+  qt/skyra/moc_lockunlock.cpp \
+  qt/skyra/moc_expandablebutton.cpp \
+  qt/skyra/moc_furabstractlistitemdelegate.cpp \
+  qt/skyra/moc_receivedialog.cpp \
+  qt/skyra/moc_pfborderimage.cpp \
+  qt/skyra/moc_topbar.cpp \
+  qt/skyra/moc_txrow.cpp \
+  qt/skyra/moc_dashboardwidget.cpp \
+  qt/skyra/moc_addresslabelrow.cpp \
+  qt/skyra/moc_contactdropdownrow.cpp \
+  qt/skyra/moc_mninfodialog.cpp \
+  qt/skyra/moc_optionbutton.cpp \
+  qt/skyra/moc_coldstakingmodel.cpp \
+  qt/skyra/moc_mnmodel.cpp \
+  qt/skyra/moc_masternodewizarddialog.cpp \
+  qt/skyra/moc_mnrow.cpp \
+  qt/skyra/moc_masternodeswidget.cpp \
+  qt/skyra/moc_myaddressrow.cpp \
+  qt/skyra/moc_csrow.cpp \
+  qt/skyra/moc_contactsdropdown.cpp \
+  qt/skyra/moc_sendchangeaddressdialog.cpp \
+  qt/skyra/moc_sendconfirmdialog.cpp \
+  qt/skyra/moc_sendcustomfeedialog.cpp \
+  qt/skyra/moc_sendmemodialog.cpp \
+  qt/skyra/moc_sendmultirow.cpp \
+  qt/skyra/moc_send.cpp \
+  qt/skyra/moc_addnewcontactdialog.cpp \
+  qt/skyra/moc_requestdialog.cpp \
+  qt/skyra/moc_receivewidget.cpp \
+  qt/skyra/moc_tooltipmenu.cpp \
+  qt/skyra/moc_addresseswidget.cpp \
+  qt/skyra/moc_defaultdialog.cpp \
+  qt/skyra/moc_coldstakingwidget.cpp \
+  qt/skyra/moc_proposalcard.cpp \
+  qt/skyra/moc_mnselectiondialog.cpp \
+  qt/skyra/moc_votedialog.cpp \
+  qt/skyra/moc_createproposaldialog.cpp \
+  qt/skyra/moc_proposalinfodialog.cpp \
+  qt/skyra/moc_governancewidget.cpp \
+  qt/skyra/settings/moc_settingsbackupwallet.cpp \
+  qt/skyra/settings/moc_settingsexportcsv.cpp \
+  qt/skyra/settings/moc_settingsbittoolwidget.cpp \
+  qt/skyra/settings/moc_settingsconsolewidget.cpp \
+  qt/skyra/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/skyra/settings/moc_settingsfaqwidget.cpp \
+  qt/skyra/settings/moc_settingsinformationwidget.cpp \
+  qt/skyra/settings/moc_settingsmainoptionswidget.cpp \
+  qt/skyra/settings/moc_settingssignmessagewidgets.cpp \
+  qt/skyra/settings/moc_settingswalletoptionswidget.cpp \
+  qt/skyra/settings/moc_settingswalletrepairwidget.cpp \
+  qt/skyra/settings/moc_settingswidget.cpp \
+  qt/skyra/moc_welcomecontentwidget.cpp \
+  qt/skyra/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/skyra.moc \
+  qt/intro.moc
+
+QT_QRC_CPP = qt/qrc_skyra.cpp
+QT_QRC = qt/skyra.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_skyra_locale.cpp
+QT_QRC_LOCALE = qt/skyra_locale.qrc
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/skyra/skyragui.h \
+  qt/bitcoinunits.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsmodel.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/rpcconsole.h \
+  qt/rpcexecutor.h \
+  qt/trafficgraphwidget.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/skyra/prunnable.h \
+  qt/skyra/pfborderimage.h \
+  qt/skyra/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/skyra/pwidget.h \
+  qt/skyra/focuseddialog.h \
+  qt/skyra/guitransactionsutils.h \
+  qt/skyra/snackbar.h \
+  qt/skyra/navmenuwidget.h \
+  qt/skyra/lockunlock.h \
+  qt/skyra/receivedialog.h \
+  qt/skyra/furlistrow.h \
+  qt/skyra/furabstractlistitemdelegate.h \
+  qt/skyra/txviewholder.h \
+  qt/skyra/qtutils.h \
+  qt/skyra/expandablebutton.h \
+  qt/skyra/balancebubble.h \
+  qt/skyra/topbar.h \
+  qt/skyra/txrow.h \
+  qt/skyra/addressholder.h \
+  qt/skyra/addressfilterproxymodel.h \
+  qt/skyra/dashboardwidget.h \
+  qt/skyra/addresslabelrow.h \
+  qt/skyra/contactdropdownrow.h \
+  qt/skyra/mninfodialog.h \
+  qt/skyra/optionbutton.h \
+  qt/skyra/coldstakingmodel.h \
+  qt/skyra/mnmodel.h \
+  qt/skyra/masternodewizarddialog.h \
+  qt/skyra/mnrow.h \
+  qt/skyra/masternodeswidget.h \
+  qt/skyra/myaddressrow.h \
+  qt/skyra/csrow.h \
+  qt/skyra/contactsdropdown.h \
+  qt/skyra/sendchangeaddressdialog.h \
+  qt/skyra/sendconfirmdialog.h \
+  qt/skyra/sendcustomfeedialog.h \
+  qt/skyra/sendmemodialog.h \
+  qt/skyra/sendmultirow.h \
+  qt/skyra/send.h \
+  qt/skyra/addnewcontactdialog.h \
+  qt/skyra/requestdialog.h \
+  qt/skyra/receivewidget.h \
+  qt/skyra/tooltipmenu.h \
+  qt/skyra/addresseswidget.h \
+  qt/skyra/defaultdialog.h \
+  qt/skyra/coldstakingwidget.h \
+  qt/skyra/governancemodel.h \
+  qt/skyra/proposalcard.h \
+  qt/skyra/mnselectiondialog.h \
+  qt/skyra/votedialog.h \
+  qt/skyra/createproposaldialog.h \
+  qt/skyra/proposalinfodialog.h \
+  qt/skyra/governancewidget.h \
+  qt/skyra/settings/settingsbackupwallet.h \
+  qt/skyra/settings/settingsexportcsv.h \
+  qt/skyra/settings/settingsbittoolwidget.h \
+  qt/skyra/settings/settingsconsolewidget.h \
+  qt/skyra/settings/settingsdisplayoptionswidget.h \
+  qt/skyra/settings/settingsfaqwidget.h \
+  qt/skyra/settings/settingsinformationwidget.h \
+  qt/skyra/settings/settingsmainoptionswidget.h \
+  qt/skyra/settings/settingssignmessagewidgets.h \
+  qt/skyra/settings/settingswalletoptionswidget.h \
+  qt/skyra/settings/settingswalletrepairwidget.h \
+  qt/skyra/settings/settingswidget.h \
+  qt/skyra/welcomecontentwidget.h \
+  qt/skyra/splash.h
+
+RES_ICONS = \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/ic-transaction-received.svg \
+  qt/res/icons/ic-transaction-mint.svg \
+  qt/res/icons/ic-transaction-sent.svg \
+  qt/res/icons/ic-transaction-staked.svg \
+  qt/skyra/res/img/bg-dashboard-banner.png \
+  qt/skyra/res/img/bg-multi-number-dark.png \
+  qt/skyra/res/img/ic-check-locked.svg \
+  qt/skyra/res/img/ic-nav-address.svg \
+  qt/skyra/res/img/ic-update.svg \
+  qt/skyra/res/img/bg-multi-number.png \
+  qt/skyra/res/img/ic-check-mint-off.svg \
+  qt/skyra/res/img/ic-nav-cold-staking.svg \
+  qt/skyra/res/img/ic-nav-cold-staking-active.svg \
+  qt/skyra/res/img/ic-nav-dashboard-active.svg \
+  qt/skyra/res/img/ic-wallet-status-locked.svg \
+  qt/skyra/res/img/bg-splash.svg \
+  qt/skyra/res/img/bg-splash.png \
+  qt/skyra/res/img/ic-check-mint.svg \
+  qt/skyra/res/img/ic-nav-dashboard-hover.svg \
+  qt/skyra/res/img/ic-wallet-status-staking.svg \
+  qt/skyra/res/img/ic-check-peers-off.svg \
+  qt/skyra/res/img/ic-nav-dashboard.svg \
+  qt/skyra/res/img/ic-wallet-status-unlocked.svg \
+  qt/skyra/res/img/ic-check-peers.svg \
+  qt/skyra/res/img/ic-nav-master-active.svg \
+  qt/skyra/res/img/ic-watch-password-white.svg \
+  qt/skyra/res/img/bg-welcome-container.jpg \
+  qt/skyra/res/img/bg-welcome-container.png \
+  qt/skyra/res/img/bg-welcome-container.svg \
+  qt/skyra/res/img/bg-welcome-container@2x.png \
+  qt/skyra/res/img/bg-welcome-container@3x.png \
+  qt/skyra/res/img/ic-check-staking-off.svg \
+  qt/skyra/res/img/ic-nav-master-hover.svg \
+  qt/skyra/res/img/ic-watch-password.svg \
+  qt/skyra/res/img/bg-welcome.jpg \
+  qt/skyra/res/img/bg-welcome.svg \
+  qt/skyra/res/img/bg-welcome@2x.jpg \
+  qt/skyra/res/img/bg-welcome@3x.jpg \
+  qt/skyra/res/img/bg-welcome.png \
+  qt/skyra/res/img/ic-check-staking.svg \
+  qt/skyra/res/img/ic-check-top-masternode.png \
+  qt/skyra/res/img/ic-check-top-config.png \
+  qt/skyra/res/img/ic-nav-master.svg \
+  qt/skyra/res/img/img-dashboard-banner.jpg \
+  qt/skyra/res/img/btn-radio-active.png \
+  qt/skyra/res/img/ic-check-sync-off.svg \
+  qt/skyra/res/img/ic-nav-privacy-active.svg \
+  qt/skyra/res/img/img-empty-contacts.svg \
+  qt/skyra/res/img/btn-radio-off.svg \
+  qt/skyra/res/img/ic-check-sync.png \
+  qt/skyra/res/img/ic-nav-privacy-hover.svg \
+  qt/skyra/res/img/img-empty-dark-contacts.svg \
+  qt/skyra/res/img/ic-contact-arrow-down.svg \
+  qt/skyra/res/img/ic-contact-arrow-down-white.svg \
+  qt/skyra/res/img/ic-check-sync.svg \
+  qt/skyra/res/img/ic-check-faq.svg \
+  qt/skyra/res/img/ic-nav-privacy.svg \
+  qt/skyra/res/img/img-empty-dark-error.svg \
+  qt/skyra/res/img/ic-add-label.svg \
+  qt/skyra/res/img/ic-pending.svg \
+  qt/skyra/res/img/ic-check-theme-dark.svg \
+  qt/skyra/res/img/ic-nav-receive-active.png \
+  qt/skyra/res/img/img-empty-dark-masternode.svg \
+  qt/skyra/res/img/ic-add-liliac.svg \
+  qt/skyra/res/img/ic-check-theme-light.svg \
+  qt/skyra/res/img/ic-nav-receive-hover.svg \
+  qt/skyra/res/img/img-empty-dark-multisend.svg \
+  qt/skyra/res/img/ic-add-purple.svg \
+  qt/skyra/res/img/ic-check-white.svg \
+  qt/skyra/res/img/ic-nav-receive.svg \
+  qt/skyra/res/img/img-empty-dark-peers.svg \
+  qt/skyra/res/img/ic-add.svg \
+  qt/skyra/res/img/ic-check.svg \
+  qt/skyra/res/img/ic-nav-send-active.png \
+  qt/skyra/res/img/img-empty-dark-staking-off.svg \
+  qt/skyra/res/img/img-empty-dark-staking-on.png \
+  qt/skyra/res/img/ic-address-book-grey.svg \
+  qt/skyra/res/img/ic-chevron-left.svg \
+  qt/skyra/res/img/ic-nav-send-hover.svg \
+  qt/skyra/res/img/img-empty-dark-transactions.png \
+  qt/skyra/res/img/ic-address-book-white.svg \
+  qt/skyra/res/img/ic-chevron-right.svg \
+  qt/skyra/res/img/ic-chevron-right-liliac.svg \
+  qt/skyra/res/img/ic-nav-send.svg \
+  qt/skyra/res/img/img-empty-error.svg \
+  qt/skyra/res/img/ic-address-book.svg \
+  qt/skyra/res/img/ic-clear-liliac.svg \
+  qt/skyra/res/img/ic-nav-settings-active.svg \
+  qt/skyra/res/img/img-empty-masternode.svg \
+  qt/skyra/res/img/ic-address-send-white.svg \
+  qt/skyra/res/img/ic-clear-purple.svg \
+  qt/skyra/res/img/ic-nav-settings-hover.svg \
+  qt/skyra/res/img/img-empty-multisend.svg \
+  qt/skyra/res/img/ic-address-send.svg \
+  qt/skyra/res/img/ic-close-white.svg \
+  qt/skyra/res/img/ic-nav-settings.svg \
+  qt/skyra/res/img/img-empty-peers.svg \
+  qt/skyra/res/img/img-empty-privacy.png \
+  qt/skyra/res/img/img-empty-privacy-dark.png \
+  qt/skyra/res/img/ic-arrow-drop-down-white.svg \
+  qt/skyra/res/img/ic-close.svg \
+  qt/skyra/res/img/ic-radio-liliac-on.png \
+  qt/skyra/res/img/img-empty-staking-off.svg \
+  qt/skyra/res/img/ic-arrow-drop-down.svg \
+  qt/skyra/res/img/ic-coin-sky.png \
+  qt/skyra/res/img/ic-receive-off.svg \
+  qt/skyra/res/img/img-empty-staking-on.png \
+  qt/skyra/res/img/ic-arrow-drop-up-white.svg \
+  qt/skyra/res/img/ic-coin-zsky.png \
+  qt/skyra/res/img/ic-receive-on.svg \
+  qt/skyra/res/img/img-empty-transactions.png \
+  qt/skyra/res/img/ic-arrow-drop-up.svg \
+  qt/skyra/res/img/ic-coin-zsky.png \
+  qt/skyra/res/img/ic-received.svg \
+  qt/skyra/res/img/img-logo-skyra.png \
+  qt/skyra/res/img/ic-arrow-drop-white-down.svg \
+  qt/skyra/res/img/ic-combo-box.png \
+  qt/skyra/res/img/ic-send.svg \
+  qt/skyra/res/img/img-logo-skyra@2x.png \
+  qt/skyra/res/img/ic-arrow-purple-down.png \
+  qt/skyra/res/img/ic-connect.svg \
+  qt/skyra/res/img/ic-submenu-lock.svg \
+  qt/skyra/res/img/img-logo-skyra@3x.png \
+  qt/skyra/res/img/img-logo-skyra.png \
+  qt/skyra/res/img/ic-arrow-right-white.svg \
+  qt/skyra/res/img/ic-arrow-left-white.svg \
+  qt/skyra/res/img/ic-arrow-left.svg \
+  qt/skyra/res/img/ic-copy-liliac.svg \
+  qt/skyra/res/img/ic-submenu-staking.svg \
+  qt/skyra/res/img/img-nav-logo-skyra.png \
+  qt/skyra/res/img/ic-arrow-right.svg \
+  qt/skyra/res/img/ic-copy.svg \
+  qt/skyra/res/img/ic-copy-big.svg \
+  qt/skyra/res/img/ic-copy-big-white.svg \
+  qt/skyra/res/img/ic-submenu-unlock.svg \
+  qt/skyra/res/img/img-nav-logo.png \
+  qt/skyra/res/img/ic-arrow-white-left.svg \
+  qt/skyra/res/img/ic-exit.svg \
+  qt/skyra/res/img/ic-switch-liliac-on.svg \
+  qt/skyra/res/img/img-nav-logo.svg \
+  qt/skyra/res/img/ic-arrow-white-right.svg \
+  qt/skyra/res/img/ic-expand.svg \
+  qt/skyra/res/img/ic-switch-off.svg \
+  qt/skyra/res/img/img-qr-test-big.png \
+  qt/skyra/res/img/ic-check-active.svg \
+  qt/skyra/res/img/ic-folder.svg \
+  qt/skyra/res/img/ic-switch-on.svg \
+  qt/skyra/res/img/img-qr-test.png \
+  qt/skyra/res/img/ic-check-box.svg \
+  qt/skyra/res/img/ic-check-box-light.svg \
+  qt/skyra/res/img/ic-check-box-dark-active.svg \
+  qt/skyra/res/img/ic-check-box-indeterminate.svg \
+  qt/skyra/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/skyra/res/img/ic-label-liliac.svg \
+  qt/skyra/res/img/ic-transaction-warning.svg \
+  qt/skyra/res/img/ic-transaction-mint.svg \
+  qt/skyra/res/img/ic-transaction-mint-inactive.svg \
+  qt/skyra/res/img/ic-check-cold-staking.svg \
+  qt/skyra/res/img/ic-check-cold-staking-off.svg \
+  qt/skyra/res/img/ic-check-cold-staking-enabled.svg \
+  qt/skyra/res/img/dark/ic-transaction-cs-contract.svg \
+  qt/skyra/res/img/dark/ic-transaction-cs-contract-inactive.svg \
+  qt/skyra/res/img/img-qr.svg \
+  qt/skyra/res/img/ic-check-connect-off.svg \
+  qt/skyra/res/img/ic-check-tor-off.svg \
+  qt/skyra/res/img/ic-check-tor.svg \
+  qt/skyra/res/img/ic-label.svg \
+  qt/skyra/res/img/ic-transaction-received.svg \
+  qt/skyra/res/img/dark/ic-transaction-received.svg \
+  qt/skyra/res/img/dark/ic-transaction-warning.svg \
+  qt/skyra/res/img/dark/ic-transaction-mint.svg \
+  qt/skyra/res/img/dark/ic-transaction-mint-inactive.svg \
+  qt/skyra/res/img/ic-transaction-received-inactive.svg \
+  qt/skyra/res/img/dark/ic-transaction-received-inactive.svg \
+  qt/skyra/res/img/img-welcome-step1.png \
+  qt/skyra/res/img/ic-check-connect.svg \
+  qt/skyra/res/img/ic-menu-hover.svg \
+  qt/skyra/res/img/ic-transaction-sent.svg \
+  qt/skyra/res/img/ic-transaction-sent-inactive.svg \
+  qt/skyra/res/img/dark/ic-transaction-sent.svg \
+  qt/skyra/res/img/dark/ic-transaction-sent-inactive.svg \
+  qt/skyra/res/img/img-welcome-step2.png \
+  qt/skyra/res/img/ic-check-dark.svg \
+  qt/skyra/res/img/ic-mint.svg \
+  qt/skyra/res/img/ic-transaction-staked.svg \
+  qt/skyra/res/img/ic-transaction-staked-inactive.svg \
+  qt/skyra/res/img/dark/ic-transaction-staked.svg \
+  qt/skyra/res/img/dark/ic-transaction-staked-inactive.svg \
+  qt/skyra/res/img/img-welcome-step3.png \
+  qt/skyra/res/img/ic-check-liliac-on.svg \
+  qt/skyra/res/img/ic-nav-address-active.svg \
+  qt/skyra/res/img/ic-unlock-staking.svg \
+  qt/skyra/res/img/img-welcome-step4.png \
+  qt/skyra/res/img/ic-check-locked-off.svg \
+  qt/skyra/res/img/ic-nav-address-hover.svg \
+  qt/skyra/res/img/ic-update-liliac.svg \
+  qt/skyra/res/img/ic-arrow-drop-down-purple.png \
+  qt/skyra/res/img/ic-arrow-drop-up-purple.png \
+  qt/skyra/res/img/ic-check-liliac-indeterminate.svg \
+  qt/skyra/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/skyra/res/img/ic-transaction-stake-delegated.svg \
+  qt/skyra/res/img/ic-transaction-stake-delegated-inactive.svg \
+  qt/skyra/res/img/ic-transaction-stake-hot.svg \
+  qt/skyra/res/img/ic-transaction-stake-hot-inactive.svg \
+  qt/skyra/res/img/dark/ic-transaction-stake-hot.svg \
+  qt/skyra/res/img/dark/ic-transaction-stake-hot-inactive.svg \
+  qt/skyra/res/img/dark/ic-transaction-stake-delegated.svg \
+  qt/skyra/res/img/dark/ic-transaction-stake-delegated-inactive.svg \
+  qt/skyra/res/img/ic-transaction-cs-contract.svg \
+  qt/skyra/res/img/ic-transaction-cs-contract-inactive.svg \
+  qt/skyra/res/img/ic-check-box-indeterminate.svg \
+  qt/skyra/res/img/ic-information.svg \
+  qt/skyra/res/img/ic-information-hover.svg \
+  qt/skyra/res/img/ani-loading-dark.gif \
+  qt/skyra/res/img/ani-loading.gif \
+  qt/skyra/res/img/ic-check-vote.svg \
+  qt/skyra/res/img/ic-check-vote-active.svg \
+  qt/skyra/res/img/ic-check-vote-dark.svg \
+  qt/skyra/res/img/ic-check-vote-active-dark.svg \
+  qt/skyra/res/img/ic-check-block.svg \
+  qt/skyra/res/img/ic-filter.svg \
+  qt/skyra/res/img/ic-link.svg \
+  qt/skyra/res/img/ic-nav-governance.svg \
+  qt/skyra/res/img/ic-nav-governance-active.svg \
+  qt/skyra/res/img/ic-nav-governance-hover.svg \
+  qt/skyra/res/img/ic-time.svg \
+  qt/skyra/res/img/ic-link-hover.svg \
+  qt/skyra/res/img/img-empty-governance.svg \
+  qt/skyra/res/img/img-empty-dark-governance.svg
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/skyra/skyragui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/rpcexecutor.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentserver.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/skyra/loadingdialog.cpp \
+  qt/skyra/pwidget.cpp \
+  qt/skyra/focuseddialog.cpp \
+  qt/skyra/guitransactionsutils.cpp \
+  qt/skyra/snackbar.cpp \
+  qt/skyra/navmenuwidget.cpp \
+  qt/skyra/lockunlock.cpp \
+  qt/skyra/receivedialog.cpp \
+  qt/skyra/furabstractlistitemdelegate.cpp \
+  qt/skyra/txviewholder.cpp \
+  qt/skyra/qtutils.cpp \
+  qt/skyra/expandablebutton.cpp \
+  qt/skyra/balancebubble.cpp \
+  qt/skyra/topbar.cpp \
+  qt/skyra/txrow.cpp \
+  qt/skyra/addressholder.cpp \
+  qt/skyra/addressfilterproxymodel.cpp \
+  qt/skyra/dashboardwidget.cpp \
+  qt/skyra/addresslabelrow.cpp \
+  qt/skyra/contactdropdownrow.cpp \
+  qt/skyra/contactsdropdown.cpp \
+  qt/skyra/optionbutton.cpp \
+  qt/skyra/mninfodialog.cpp \
+  qt/skyra/coldstakingmodel.cpp \
+  qt/skyra/mnmodel.cpp \
+  qt/skyra/masternodewizarddialog.cpp \
+  qt/skyra/mnrow.cpp \
+  qt/skyra/masternodeswidget.cpp \
+  qt/skyra/myaddressrow.cpp \
+  qt/skyra/csrow.cpp \
+  qt/skyra/sendchangeaddressdialog.cpp \
+  qt/skyra/sendconfirmdialog.cpp \
+  qt/skyra/sendcustomfeedialog.cpp \
+  qt/skyra/sendmemodialog.cpp \
+  qt/skyra/sendmultirow.cpp \
+  qt/skyra/send.cpp \
+  qt/skyra/addnewcontactdialog.cpp \
+  qt/skyra/requestdialog.cpp \
+  qt/skyra/receivewidget.cpp \
+  qt/skyra/tooltipmenu.cpp \
+  qt/skyra/addresseswidget.cpp \
+  qt/skyra/defaultdialog.cpp \
+  qt/skyra/coldstakingwidget.cpp \
+  qt/skyra/governancemodel.cpp \
+  qt/skyra/proposalcard.cpp \
+  qt/skyra/mnselectiondialog.cpp \
+  qt/skyra/votedialog.cpp \
+  qt/skyra/createproposaldialog.cpp \
+  qt/skyra/proposalinfodialog.cpp \
+  qt/skyra/governancewidget.cpp \
+  qt/skyra/settings/settingsbackupwallet.cpp \
+  qt/skyra/settings/settingsexportcsv.cpp \
+  qt/skyra/settings/settingsbittoolwidget.cpp \
+  qt/skyra/settings/settingsconsolewidget.cpp \
+  qt/skyra/settings/settingsdisplayoptionswidget.cpp \
+  qt/skyra/settings/settingsfaqwidget.cpp \
+  qt/skyra/settings/settingsinformationwidget.cpp \
+  qt/skyra/settings/settingsmainoptionswidget.cpp \
+  qt/skyra/settings/settingssignmessagewidgets.cpp \
+  qt/skyra/settings/settingswalletoptionswidget.cpp \
+  qt/skyra/settings/settingswalletrepairwidget.cpp \
+  qt/skyra/settings/settingswidget.cpp \
+  qt/skyra/welcomecontentwidget.cpp \
+  qt/skyra/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/splash_regtest.png
+
+RES_CSS = \
+  qt/res/css/default.css \
+  qt/skyra/res/css/style_dark.css \
+  qt/skyra/res/css/style_light.css
+
+BITCOIN_RC = qt/res/skyra-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_skyra_qt_OBJECTS) : | $(QT_MOC)
+
+# skyra-qt binary #
+qt_skyra_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_skyra_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_skyra_qt_SOURCES = qt/skyra.cpp
+if TARGET_DARWIN
+  qt_skyra_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_skyra_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_skyra_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_skyra_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_skyra_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_skyra_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBSAPLING) $(LIBRUSTZCASH) $(LIBZCASH_LIBS) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(MINIUPNPC_LIBS) $(NATPMP_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(BLS_LIBS)
+qt_skyra_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_skyra_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/skyrastrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/skyrastrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/skyra.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/skyra_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name skyra_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name skyra $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/skyra/*.gcda qt/skyra/*.gcno qt/skyra/settings/*.gcda qt/skyra/settings/*.gcno qt/temp_skyra_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+skyra_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_skyra_qt_OBJECTS) qt/skyra-qt$(EXEEXT) $(LIBBITCOINQT)
+
+skyra_qt : qt/skyra-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@

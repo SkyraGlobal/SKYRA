@@ -1,0 +1,18 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="de">locale/skyra_de.qm</file>
+        <file alias="en">locale/skyra_en.qm</file>
+        <file alias="en_US">locale/skyra_en_US.qm</file>
+        <file alias="es">locale/skyra_es.qm</file>
+        <file alias="es_ES">locale/skyra_es_ES.qm</file>
+        <file alias="fr_FR">locale/skyra_fr_FR.qm</file>
+        <file alias="hr_HR">locale/skyra_hr_HR.qm</file>
+        <file alias="it">locale/skyra_it.qm</file>
+        <file alias="ko_KR">locale/skyra_ko_KR.qm</file>
+        <file alias="nl">locale/skyra_nl.qm</file>
+        <file alias="pl">locale/skyra_pl.qm</file>
+        <file alias="ru">locale/skyra_ru.qm</file>
+        <file alias="tr">locale/skyra_tr.qm</file>
+        <file alias="zh_CN">locale/skyra_zh_CN.qm</file>
+    </qresource>
+</RCC>

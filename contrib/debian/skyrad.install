@@ -1,0 +1,3 @@
+usr/local/bin/skyrad usr/bin
+usr/local/bin/skyra-cli usr/bin
+debian/examples/skyra.conf etc/skyra

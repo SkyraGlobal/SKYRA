@@ -1,0 +1,8 @@
+/usr/bin/skyra-cli		--	gen_context(system_u:object_r:skyra_exec_t,s0)
+/usr/sbin/skyrad		--	gen_context(system_u:object_r:skyra_exec_t,s0)
+/usr/lib(64)?/skyra/skyrad		--	gen_context(system_u:object_r:skyra_exec_t,s0)
+
+/etc/skyra(/.*)?		gen_context(system_u:object_r:skyra_conf_t,s0)
+/var/lib/skyra(/.*)?		gen_context(system_u:object_r:skyra_var_lib_t,s0)
+
+(/var)?/run/skyrad(/.*)?   gen_context(system_u:object_r:skyra_var_run_t,s0)

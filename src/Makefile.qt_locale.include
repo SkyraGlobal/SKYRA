@@ -1,0 +1,15 @@
+QT_TS = \
+  qt/locale/skyra_de.ts \
+  qt/locale/skyra_en.ts \
+  qt/locale/skyra_en_US.ts \
+  qt/locale/skyra_es.ts \
+  qt/locale/skyra_es_ES.ts \
+  qt/locale/skyra_fr_FR.ts \
+  qt/locale/skyra_hr_HR.ts \
+  qt/locale/skyra_it.ts \
+  qt/locale/skyra_ko_KR.ts \
+  qt/locale/skyra_nl.ts \
+  qt/locale/skyra_pl.ts \
+  qt/locale/skyra_ru.ts \
+  qt/locale/skyra_tr.ts \
+  qt/locale/skyra_zh_CN.ts

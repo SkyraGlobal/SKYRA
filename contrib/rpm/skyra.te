@@ -1,0 +1,81 @@
+policy_module(skyra, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type skyra_t;
+type skyra_exec_t;
+init_daemon_domain(skyra_t, skyra_exec_t)
+
+permissive skyra_t;
+
+type skyra_initrc_exec_t;
+init_script_file(skyra_initrc_exec_t)
+
+type skyra_conf_t;
+files_type(skyra_conf_t)
+
+type skyra_var_lib_t;
+files_type(skyra_var_lib_t)
+
+type skyra_var_run_t;
+files_type(skyra_var_run_t)
+
+type skyra_port_t;
+corenet_port(skyra_port_t)
+
+########################################
+#
+# skyra local policy
+#
+allow skyra_t self:process { fork };
+
+allow skyra_t self:fifo_file rw_fifo_file_perms;
+allow skyra_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(skyra_t, skyra_conf_t, skyra_conf_t)
+manage_files_pattern(skyra_t, skyra_conf_t, skyra_conf_t)
+
+manage_dirs_pattern(skyra_t, skyra_var_lib_t, skyra_var_lib_t)
+manage_files_pattern(skyra_t, skyra_var_lib_t, skyra_var_lib_t)
+files_var_lib_filetrans(skyra_t, skyra_var_lib_t, { dir file })
+
+manage_dirs_pattern(skyra_t, skyra_var_run_t, skyra_var_run_t)
+manage_files_pattern(skyra_t, skyra_var_run_t, skyra_var_run_t)
+
+sysnet_dns_name_resolve(skyra_t)
+corenet_all_recvfrom_unlabeled(skyra_t)
+
+allow skyra_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(skyra_t)
+corenet_tcp_sendrecv_generic_node(skyra_t)
+corenet_tcp_sendrecv_all_ports(skyra_t)
+corenet_tcp_bind_generic_node(skyra_t)
+
+gen_require(`
+    type skyra_port_t;
+')
+allow skyra_t skyra_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type skyra_port_t;
+')
+allow skyra_t skyra_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(skyra_t)
+
+files_read_etc_files(skyra_t)
+
+miscfiles_read_localization(skyra_t)
+
+sysnet_dns_name_resolve(skyra_t)
+
+allow skyra_t skyra_exec_t:file execute_no_trans;
+allow skyra_t self:process setsched;
+corecmd_exec_ls(skyra_t)
+corenet_tcp_connect_http_port(skyra_t)
+dev_read_urand(skyra_t)
+fs_getattr_xattr_fs(skyra_t)
+kernel_read_system_state(skyra_t)

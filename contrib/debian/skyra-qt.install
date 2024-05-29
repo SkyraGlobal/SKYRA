@@ -1,0 +1,6 @@
+usr/local/bin/skyra-qt usr/bin
+share/pixmaps/skyra32.xpm usr/share/pixmaps
+share/pixmaps/skyra16.xpm usr/share/pixmaps
+share/pixmaps/skyra128.png usr/share/pixmaps
+debian/skyra-qt.desktop usr/share/applications
+debian/skyra-qt.protocol usr/share/kde4/services/

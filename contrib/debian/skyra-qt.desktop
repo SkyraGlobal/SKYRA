@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=SKYRA Core
+Comment=SKYRA P2P Cryptocurrency
+Comment[fr]=SKYRA, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=SKYRA, eşten eşe kriptografik sanal para birimi
+Exec=skyra-qt %u
+Terminal=false
+Type=Application
+Icon=skyra128
+MimeType=x-scheme-handler/skyra;
+Categories=Office;Finance;
+StartupWMClass=SKYRA-qt
